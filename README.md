@@ -20,6 +20,7 @@ contracts/YourTokenFlatten.sol 파일을 열어서 withdraw() 함수 밑에 아�
 
 ##  2. truffle-config.js 수정
 KAS api를 이용하고 싶으신 분은 아래 kas console에서 AccessKey 생성하신 후에 아래에 수정
+https://console.klaytnapi.com/
 ```
 https://console.klaytnapi.com/ko/security/credential
 const accessKeyId = ""; 
