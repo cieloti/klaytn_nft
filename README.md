@@ -69,9 +69,21 @@ upload-contract/package.json파일에 아래 부분을 추가합니다.
 Usage: npm run mint address price
 Usage: npm run public true/false
 Usage: npm run reveal true/false
-Usage: _antibotInterval _mintLimitPerBlock _mintLimitPerSale _mintStartBlockNumber _mintIndexForSale _maxSaleAmount _mintPrice
+Usage: npm run sale _antibotInterval _mintLimitPerBlock _mintLimitPerSale _mintStartBlockNumber _mintIndexForSale _maxSaleAmount _mintPrice
 Usage: npm run uri ipfs://{cid}
 usage: npm run supply
 ```
 
+## 5. 민팅 사이트 만들기
+contract를 아래에 복사하고 npm install로 기본 라이브러리 설치
+```
+cp contract.json minting-site/src/data/
+npm install
+```
+
+Minting.js 파일을 수정하고 npm run start로 정상적으로 실행되는지 확인
+```
+minting-site/src/components/Minting/Minting.js
+npm run start
+```
 
