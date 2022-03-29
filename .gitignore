@@ -1,0 +1,7 @@
+upload-contract/node_modules
+upload-contract/privateKeys.js
+upload-contract/package-lock.json
+upload-contract/test/local-klaytn-deploy
+upload-contract/build
+minting-site/node_modules/
+contract.json

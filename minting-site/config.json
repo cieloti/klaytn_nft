@@ -1,0 +1,10 @@
+{
+    "NumberOfNFT" : 10000,
+    "TokenName" : "name",
+    "TokenSymbol" : "symbol",
+    "TreasuryAccount": "",
+    "PrivateKey": "",
+    "pinataApiKey":"",
+    "pinataSecretApiKey": "",
+    "imageExtension" : "png"
+}

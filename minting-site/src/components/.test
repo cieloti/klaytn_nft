@@ -1,0 +1,114 @@
+import Caver from 'caver-js';
+import React, { useEffect, useState } from 'react';
+import ContractData from '../Constant/Contract.json';
+// import Stack from '@mui/material/Stack';
+// import Button from '@mui/material/Button';
+// import { styled } from '@mui/material/styles';
+
+let contractAddress = ContractData.baobabContract;
+if (process.env.REACT_APP_NETWORK === 'baobab') {
+  contractAddress = ContractData.baobabContract;
+} else if (process.env.REACT_APP_NETWORK === 'mainnet') {
+  contractAddress = ContractData.cypressContract;
+}
+const { contractABI } = ContractData.contractABI;
+// const timeStmp = + new Date();
+
+// const Div = styled('div')(({ theme }) => ({
+//   ...theme.typography.button,
+//   backgroundColor: theme.palette.background.paper,
+//   padding: theme.spacing(0),
+//   fontSize:30,
+// }));
+
+export default function Mint() {
+  // const [nftCount, setNftCount] = useState(0);
+  const [account, setAccount] = useState('');
+  const [minterAddress, setMinterAddress] = useState('');
+  const [mintCnt, setMintCnt] = useState(0);
+  const caver = new Caver(window.klaytn);
+  const contract = new caver.contract.create(contractABI, contractAddress);
+  const NFTPrice = process.env.REACT_APP_NFT_PRICE.toString();
+  // const addr = process.env.REACT_APP_TREASURY_ACCOUNT;
+
+  useEffect(async () => {
+    const mintCount = await contract.methods.totalSupply().call();
+    setMintCnt(mintCount);
+  }, [minterAddress]);
+
+  const wait = async (ms) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, ms);
+    });
+  };
+
+  const connectWallet = async () => {
+    const addr = process.env.REACT_APP_TREASURY_ACCOUNT;
+
+    if (window.klaytn){
+      console.log(window.klaytn);
+      const [address] = await window.klaytn.enable();
+      setAccount(address);
+      setMinterAddress(addr);
+    }
+  };
+
+  const mintNFT1 = async () => {
+    await caver.klay.sendTransaction({
+      type: 'SMART_CONTRACT_EXECUTION',
+      from: account,
+      to: contractAddress,
+      value: caver.utils.toPeb((NFTPrice * 1).toString(), 'KLAY'),
+      data: contract.methods.publicMint(1).encodeABI(),
+      gas: '850000'
+    }).then((res)=>{console.log(res);})
+    .catch((err) => {alert("Mint has failed.");});
+    const mintCount = await contract.methods.totalSupply().call();
+    setMintCnt(mintCount);
+
+    await wait(3000);
+  };
+
+  const mintNFT5 = async () => {
+    // setNftCount(5);
+    await caver.klay.sendTransaction({
+        type: 'SMART_CONTRACT_EXECUTION',
+        from: account,
+        to: contractAddress,
+        value: caver.utils.toPeb((NFTPrice * 5).toString(), 'KLAY'),
+        data: contract.methods.publicMint(5).encodeABI(),
+        gas: '2000000'
+      }).then((res)=>{console.log(res);})
+      .catch((err) => {alert("Mint has failed.");});
+      const mintCount = await contract.methods.totalSupply().call();
+      setMintCnt(mintCount);
+
+    await wait(3000);
+  };
+
+  return (
+    <>
+    <div>HelloWorld</div>
+    <div>{mintCnt}/{process.env.REACT_APP_NUMBER_OF_NFT}</div>
+    {/* // <div>
+    //   <div>Price : {process.env.REACT_APP_NFT_PRICE} Klay</div>
+    //   <div>
+    //   <div style={{width:'300px', margin:'auto'}}>
+    //     <Button variant="contained"  onClick={connectWallet}>Connect Wallet</Button>
+    //   </div>
+    //   </div>
+    //   <div>Wallet address : {account}</div>
+    //   <br/>
+    //   <div style={{width:'250px', margin:'auto'}}>
+    //     <Stack spacing={2} direction="row" >
+    //       <Button variant="outlined"  onClick={mintNFT1}>Mint 1 NFT</Button>
+    //       <Button variant="outlined"  onClick={mintNFT5}>Mint 5 NFT</Button>
+    //     </Stack>
+    //   </div>
+    // </div> */}
+    </>
+  );
+}
+
