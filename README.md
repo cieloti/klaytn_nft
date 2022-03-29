@@ -87,3 +87,29 @@ minting-site/src/components/Minting/Minting.js
 npm run start
 ```
 
+
+## 6. 사이트 Web에 올리기
+minting-site에서 만든 것을 build한다
+```
+cd minting-site
+npm run build
+mv build ../homepage/dist/
+```
+
+Heroku(https://www.heroku.com/)에 접속하여 아이디를 만들고 Heroku CLI를 다운로드 한다(https://devcenter.heroku.com/articles/heroku-cli)
+dashboard에 들어가서 Create New App을 만들고 deploy 탭을 연다
+https://dashboard.heroku.com/apps
+
+아래와 같이 서버에 올린 후에 정상적으로 동작하는지 확인한다.
+```
+heroku login
+heroku git:clone -a app명
+homepage 하위의 내용을 모두 app명 아래로 옮긴다
+git add .
+git commit -am "Initial homepage"
+git push heroku master
+```
+ 
+
+
+
