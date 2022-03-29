@@ -56,22 +56,22 @@ deploy에 성공하면 아래와 같이 transaction hash 값이 나오는데 이
 위에서 나온 contract address를 복사하여 contract.json의 baobabContract 에 복사해 넣습니다
 contract를 변경했으면 solidity 5버전을 설치하고 아래 명령어로 생성된 abi(최하단 YourTokenFlatten에 있는 json형식)를 복사해
 contract.json contractABI 에 넣습니다.
-'''
+```
 solc --abi --bin upload-contract/contracts/YourTokenFlatten.sol > YourTokenFlatten.abi
-'''
+```
 
 contract.json의 minterAddress, minterPrivate키는 contract생성한 본인의 카이카스 주소와 privatekey를 넣습니다.
 upload-contract/package.json파일에 아래 부분을 추가합니다.
 "type":"module"
 
 아래와 같은 명령어를 호출하여 solidity 파일에서 정의한 함수를 호출할 수 있습니다.
-'''
+```
 Usage: npm run mint address price
 Usage: npm run public true/false
 Usage: npm run reveal true/false
 Usage: _antibotInterval _mintLimitPerBlock _mintLimitPerSale _mintStartBlockNumber _mintIndexForSale _maxSaleAmount _mintPrice
 Usage: npm run uri ipfs://{cid}
 usage: npm run supply
-'''
+```
 
 
