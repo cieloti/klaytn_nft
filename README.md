@@ -10,11 +10,6 @@ $ npm install -g truffle
 ```
 
 ##  How to modify contract
-* contract에 5% donation 코드가 포함되어 있습니다.
-contracts/YourTokenFlatten.sol 파일을 열어서 withdraw() 함수 밑에 아래 부분을 주석처리 하면 donation되지 않습니다
-```
-주소.transfer(address(this).balance * 5 / 100);
-```
 
 ## 1. migrations/2_contract_migration.js 파일을 열어서 name, symbol을 변경
 

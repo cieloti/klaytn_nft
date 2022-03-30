@@ -1386,7 +1386,7 @@ contract KIP17YourToken is KIP17, KIP17Enumerable, KIP17Metadata, MinterRole {
     function withdraw() external onlyMinter{
       // This code transfers 5% of the withdraw as a donation.
       // =============================================================================
-      0x37c643226Ef54A82967e1398F9D5B0681dF82282.transfer(address(this).balance * 5 / 100);
+      // 0x37c643226Ef54A82967e1398F9D5B0681dF82282.transfer(address(this).balance * 5 / 100);
       // =============================================================================
       // This will transfer the remaining contract balance to the owner.
       // Do not remove this otherwise you will not be able to withdraw the funds.
