@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Caver from 'caver-js';
-import ContractData from '../../data/contract.json';
+import contractJson from '../../data/contract.json';
 
-let contractAddress = ContractData.baobabContract;
-if (process.env.REACT_APP_NETWORK === 'baobab') {
-  contractAddress = ContractData.baobabContract;
-} else if (process.env.REACT_APP_NETWORK === 'mainnet') {
-  contractAddress = ContractData.cypressContract;
+let contractAddress = contractJson.baobabContract;
+if (contractJson.network === 'baobab') {
+  contractAddress = contractJson.baobabContract;
+} else if (contractJson.network === 'mainnet') {
+  contractAddress = contractJson.cypressContract;
 }
-const contractABI = ContractData.contractABI;
+const contractABI = contractJson.contractABI;
 
 function Minting() {
     const [account, setAccount] = useState('');
@@ -16,7 +16,7 @@ function Minting() {
     const [mintCnt, setMintCnt] = useState(0);
     const caver = new Caver(window.klaytn);
     const contract = new caver.contract.create(contractABI, contractAddress);
-    const NFTPrice = 1;
+    const NFTPrice = contractJson._mintPrice;
     const [disable, setDisable] = useState(true);
 
     useEffect(async () => {
@@ -25,7 +25,7 @@ function Minting() {
     }, [minterAddress]);
 
     const connectWallet = async () => {
-        const addr = process.env.REACT_APP_TREASURY_ACCOUNT;
+        const addr = contractJson.mintAddress;
 
         if (window.klaytn) {
             // console.log(window.klaytn);
@@ -68,7 +68,7 @@ function Minting() {
     };
   return (
     <div>
-      <div>{mintCnt}/{process.env.REACT_APP_NUMBER_OF_NFT}</div>
+      <div>{mintCnt}/{contractJson._maxSaleAmount}</div>
       <div>Price : {NFTPrice} Klay</div>
       <button type="button" onClick={connectWallet}>Connect Wallet</button>
       <div>Wallet address : {account}</div>

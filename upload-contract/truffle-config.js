@@ -23,17 +23,19 @@
 //
 const fs = require('fs');
 const path = require("path");
-const Caver = require('caver-js')
+const Caver = require('caver-js');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
+const contract = fs.readFileSync("../contract.json").toString().trim();
+const contractJson = JSON.parse(contract);
 
 // https://console.klaytnapi.com/ko/security/credential
 // kas console에서 AccessKey 생성하여 작성
-const accessKeyId = "";
-const secretAccessKey = "";
+const accessKeyId = contractJson.kasAccessKey;
+const secretAccessKey = contractJson.kasSecretKey;
 
 const HDWalletProvider = require("truffle-hdwallet-provider-klaytn");
-const privateKey = ""; // Kaikas 지갑 키 내보내기한 private key 입력
-const cypressPrivateKey = "0x456";
+const privateKey = contractJson.minterPrivatekey; // Kaikas 지갑 키 내보내기한 private key 입력
+const cypressPrivateKey = contractJson.minterPrivatekey;
 
 module.exports = {
   /**

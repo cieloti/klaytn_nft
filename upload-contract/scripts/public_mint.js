@@ -5,7 +5,7 @@ const Caver = require('caver-js');
 
 const contractAddress = contractJson.baobabContract;
 let caver = new Caver('https://api.baobab.klaytn.net:8651/');
-if (process.env.REACT_APP_NETWORK === 'mainnet') {
+if (contractJson.network === 'mainnet') {
   contractAddress = ContractData.cypressContract;
   caver = new Caver('https://api.cypress.klaytn.net:8651/');
 }
@@ -14,9 +14,8 @@ async function publicFunction() {
   const contractABI = contractJson.contractABI;
   const sender = await caver.klay.accounts.wallet.add(contractJson.minterPrivatekey);
   const contract = new caver.contract.create(contractABI, contractAddress);
-  console.log("Usage: npm run public true/false");
 
-  if (process.argv[2] == "true") {
+  if (contractJson.publicMint == "true") {
     await caver.klay.sendTransaction({
       type: 'SMART_CONTRACT_EXECUTION',
       from: contractJson.minterAddress, //발행주소
@@ -25,7 +24,7 @@ async function publicFunction() {
       gas: '1000000'
     }).catch((err) => { console.log(err); });
     console.log("setPublicMintEnabled true");
-  } else if(process.argv[2] == "false") {
+  } else if(ontractJson.publicMint == "false") {
     await caver.klay.sendTransaction({
       type: 'SMART_CONTRACT_EXECUTION',
       from: contractJson.minterAddress, //발행주소

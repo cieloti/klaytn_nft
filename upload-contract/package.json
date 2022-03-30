@@ -30,8 +30,7 @@
     "reveal": "node scripts/reveal.js",
     "sale": "node scripts/sale.js",
     "mint": "node scripts/mint.js",
-    "uri": "node scripts/setBaseURI.js",
-    "testMint": "node scripts/test.js"
+    "uri": "node scripts/setBaseURI.js"
   },
   "dependencies": {
     "artifacts": "0.0.1",

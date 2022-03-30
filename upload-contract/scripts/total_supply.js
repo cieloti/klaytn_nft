@@ -5,7 +5,7 @@ const Caver = require('caver-js');
 
 const contractAddress = contractJson.baobabContract;
 let caver = new Caver('https://api.baobab.klaytn.net:8651/');
-if (process.env.REACT_APP_NETWORK === 'mainnet') {
+if (contractJson.network === 'mainnet') {
   contractAddress = ContractData.cypressContract;
   caver = new Caver('https://api.cypress.klaytn.net:8651/');
 }
