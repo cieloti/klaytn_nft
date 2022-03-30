@@ -18,18 +18,18 @@ contracts/YourTokenFlatten.sol 파일을 열어서 withdraw() 함수 밑에 아�
 
 ## 1. migrations/2_contract_migration.js 파일을 열어서 name, symbol을 변경
 
-##  2. truffle-config.js 수정
+##  2. contract.jsoon 수정
 KAS api를 이용하고 싶으신 분은 아래 kas console에서 AccessKey 생성하신 후에 아래에 수정
 https://console.klaytnapi.com/ko/security/credential
 ```
-const accessKeyId = ""; 
-const secretAccessKey = "";
+"kasAccessKey": "",
+"kasSecretKey":"",
 ```
 
 EN node 이용하시는 분은 privateKey 부분에 Kaikas 지갑에서 
 계정정보 -> 지갑키 관리 -> 지갑키 내보내기로 privateKey 복사해서 아래에 넣어줌
 ```
-const privateKey = ""
+minterPrivatekey:"",
 ```
 
 ##  3. contract deploy
@@ -65,12 +65,13 @@ upload-contract/package.json파일에 아래 부분을 추가합니다.
 "type":"module"
 
 아래와 같은 명령어를 호출하여 solidity 파일에서 정의한 함수를 호출할 수 있습니다.
+contract.jso 파일에서 각 명령에 따른 config 값을 세팅한 후에 실행합니다.
 ```
-Usage: npm run mint address price
-Usage: npm run public true/false
-Usage: npm run reveal true/false
-Usage: npm run sale _antibotInterval _mintLimitPerBlock _mintLimitPerSale _mintStartBlockNumber _mintIndexForSale _maxSaleAmount _mintPrice
-Usage: npm run uri ipfs://{cid}
+Usage: npm run mint 
+Usage: npm run public
+Usage: npm run reveal
+Usage: npm run sale 
+Usage: npm run uri
 usage: npm run supply
 ```
 
